@@ -152,11 +152,11 @@ function setup_acumos() {
     if [[ ! -e deploy ]]; then mkdir deploy; fi
     if [[ "$ACUMOS_DEPLOY_FEDERATION" == "true" ]]; then
       apps="cds azure-client deployment-client dsce federation \
-        kubernetes-client msg license-profile-editor license-rtu-editor \
+        kubernetes-client license-profile-editor license-rtu-editor \
         onboarding portal-be portal-fe sv-scanning"
     else
       apps="cds azure-client deployment-client dsce \
-        kubernetes-client msg license-profile-editor license-rtu-editor \
+        kubernetes-client license-profile-editor license-rtu-editor \
         onboarding portal-be portal-fe sv-scanning"
     fi
     for app in $apps; do
