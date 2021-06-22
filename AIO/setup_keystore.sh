@@ -32,6 +32,16 @@
 #   connected to the k8s cluster via kubectl (e.g. via tools/setup_kubectl.sh)
 #   $ bash setup_keystore.sh
 #
+function add_thales_search() {
+  trap 'fail' ERR
+  log "Adding Thales search certificates to keystore"
+  keytool -importcert \
+   -file ../../thales-search.cert \
+   -keystore certs/$ACUMOS_TRUSTSTORE \
+   -alias "thales-search" \
+   -storepass $TRUSTSTORE_PASSWORD \
+   -noprompt
+}
 
 function update_cert_env() {
   trap 'fail' ERR
@@ -71,6 +81,12 @@ function setup_keystore() {
   update_cert_env ACUMOS_CERT_KEY_PASSWORD $CERT_KEY_PASSWORD
   update_cert_env ACUMOS_KEYSTORE_PASSWORD $KEYSTORE_PASSWORD
   update_cert_env ACUMOS_TRUSTSTORE_PASSWORD $TRUSTSTORE_PASSWORD
+
+  if [[ -e ../../thales-search.cert ]]; then
+    add_thales_search
+  else
+    log "Thales search certificates not found -> skipping Thales setup"
+  fi
 
   if [[ "$DEPLOYED_UNDER" == "docker" ]]; then
     if [[ ! -e /mnt/$ACUMOS_NAMESPACE/certs ]]; then
