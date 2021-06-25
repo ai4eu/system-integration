@@ -166,6 +166,15 @@ spec:
                 "enablePublication": "<ACUMOS_PORTAL_ENABLE_PUBLICATION>",
                 "validateModel": "false",
                 "email_service": "<ACUMOS_EMAIL_SERVICE>",
+                "cas": {
+                  "login": "<ACUMOS_CAS_LOGIN_URI>",
+                  "logout": "<ACUMOS_CAS_LOGOUT_URI>",
+                  "service": {
+                    "validate": {
+                      "url": "<ACUMOS_CAS_VALIDATE_URI>"
+                      }
+                    }
+                },
                 "cas_enabled": "<ACUMOS_CAS_ENABLE>",
                 "download_bufferSize": 8,
                 "signup_enabled": "true",
@@ -288,13 +297,6 @@ spec:
                   "key": "<ACUMOS_JWT_KEY>"
                 },
                 "timeout": "80000000"
-              }
-            },
-            "cas": {
-              "service": {
-                "validate": {
-                  "url": "https://identity.linuxfoundation.org/cas/serviceValidate"
-                }
               }
             },
             "logging": {
